@@ -24,11 +24,13 @@
 			<version>1.2</version>
 		</dependency>
 		<!-- Driver MariaDB -->
-		<dependency>
-			<groupId>org.mariadb.jdbc</groupId>
-			<artifactId>mariadb-java-client</artifactId>
-			<version>3.1.4</version>
-		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.mariadb.jdbc/mariadb-java-client -->
+<dependency>
+    <groupId>org.mariadb.jdbc</groupId>
+    <artifactId>mariadb-java-client</artifactId>
+    <version>3.4.1</version>
+</dependency>
+
 
 	</dependencies>
   <build>

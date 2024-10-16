@@ -21,7 +21,7 @@ public class EmpleadosServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Empleado> empleados = new ArrayList<>();
         try (Connection connection = DatabaseConnection.getConnection()) {
-            String sql = "SELECT dni, nombre, sexo, categoria, anos_trabajados FROM Empleados";
+            String sql = "SELECT dni, nombre, sexo, categoria, anos_trabajados FROM empleados";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -35,11 +35,12 @@ public class EmpleadosServlet extends HttpServlet {
                 Empleado empleado = new Empleado(dni, nombre, sexo, categoria, anosTrabajados);
                 empleados.add(empleado);
             }
+            System.out.println("Empleados recuperados: " + empleados.size()); // Debugging
         } catch (SQLException e) {
             e.printStackTrace();
             throw new ServletException("Error al acceder a la base de datos.", e);
         }
         request.setAttribute("empleados", empleados);
-        request.getRequestDispatcher("empleados.jsp").forward(request, response);
+        request.getRequestDispatcher("views/empleados.jsp").forward(request, response);
     }
 }

@@ -10,7 +10,12 @@ public class DatabaseConnection {
     private static final String PASSWORD = "123456";
 
     public static Connection getConnection() throws SQLException {
-        Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
-        return connection;
+        try {
+            // Carga el controlador JDBC de MariaDB
+            Class.forName("org.mariadb.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            throw new SQLException("No se encontró el controlador de MariaDB", e);
+        }
+        return DriverManager.getConnection(URL, USER, PASSWORD);
     }
 }
