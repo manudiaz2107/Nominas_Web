@@ -1,6 +1,6 @@
 package empresa.controllers;
 
-import com.empresa.database.DatabaseConnection;
+import empresa.dao.EmpleadoDAO;
 import empresa.models.Empleado;
 
 import javax.servlet.ServletException;
@@ -9,38 +9,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet("/empleados")
 public class EmpleadosServlet extends HttpServlet {
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Empleado> empleados = new ArrayList<>();
-        try (Connection connection = DatabaseConnection.getConnection()) {
-            String sql = "SELECT dni, nombre, sexo, categoria, anos_trabajados FROM empleados";
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            ResultSet resultSet = preparedStatement.executeQuery();
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		EmpleadoDAO empleadoDAO = new EmpleadoDAO();
+		List<Empleado> empleados = empleadoDAO.listarEmpleados();
 
-            while (resultSet.next()) {
-                String dni = resultSet.getString("dni");
-                String nombre = resultSet.getString("nombre");
-                String sexo = resultSet.getString("sexo");
-                String categoria = resultSet.getString("categoria");
-                int anosTrabajados = resultSet.getInt("anos_trabajados");
-                
-                Empleado empleado = new Empleado(dni, nombre, sexo, categoria, anosTrabajados);
-                empleados.add(empleado);
-            }
-            System.out.println("Empleados recuperados: " + empleados.size()); // Debugging
-        } catch (SQLException e) {
-            e.printStackTrace();
-            throw new ServletException("Error al acceder a la base de datos.", e);
-        }
-        request.setAttribute("empleados", empleados);
-        request.getRequestDispatcher("views/empleados.jsp").forward(request, response);
-    }
+		request.setAttribute("empleados", empleados);
+		request.getRequestDispatcher("views/empleados.jsp").forward(request, response);
+	}
 }

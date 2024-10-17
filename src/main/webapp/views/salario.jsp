@@ -6,7 +6,7 @@
 <body>
     <h2>Consultar Salario de un Empleado</h2>
 
-    <form action="salario" method="post"> <!-- Cambiado a "salario" -->
+    <form action="salario" method="post">
         <label for="dni">DNI del Empleado:</label>
         <input type="text" id="dni" name="dni" required>
         <input type="submit" value="Buscar Salario">

@@ -9,7 +9,6 @@
     <ul>
         <li><a href="empleados">Mostrar todos los empleados</a></li>
         <li><a href="salario">Mostrar salario de un empleado</a></li>
-        <li><a href="modificar">Modificar datos de un empleado</a></li>
     </ul>
 </body>
 </html>

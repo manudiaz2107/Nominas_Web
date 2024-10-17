@@ -1,44 +1,35 @@
 package empresa.controllers;
 
-import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import empresa.dao.NominaDAO;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
-import com.empresa.database.DatabaseConnection;
-
-/**
- * Servlet implementation class SalarioServlet
- */
 @WebServlet("/salario")
 public class SalarioServlet extends HttpServlet {
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String dni = request.getParameter("dni");
-        double salario = 0.0;
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		String dni = request.getParameter("dni");
+		System.out.println("DNI recibido: " + dni); // Debugging
 
-        try (Connection connection = DatabaseConnection.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(
-                "SELECT n.salario FROM nominas n JOIN empleados e ON n.empleado_id = e.id WHERE e.dni = ?")) {
-            preparedStatement.setString(1, dni);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()) {
-                salario = resultSet.getDouble("salario");
-            } else {
-                request.setAttribute("error", "No se encontró salario para el DNI: " + dni);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            throw new ServletException("Error al acceder a la base de datos.", e);
-        }
+		NominaDAO nominaDAO = new NominaDAO();
+		double salario = nominaDAO.obtenerSalarioPorDni(dni);
 
-        request.setAttribute("salario", salario);
-        request.getRequestDispatcher("views/salario.jsp").forward(request, response);
-    }
+		if (salario > 0) {
+			System.out.println("Salario encontrado: " + salario); // Debugging
+			request.setAttribute("dni", dni);
+			request.setAttribute("salario", salario);
+			request.getRequestDispatcher("views/mostrarSalario.jsp").forward(request, response);
+		} else {
+			System.out.println("No se encontró salario para el DNI: " + dni); // Debugging
+			request.setAttribute("error", "No se encontró el salario para el DNI: " + dni);
+			request.getRequestDispatcher("views/mostrarSalario.jsp").forward(request, response);
+		}
+	}
+
 }
