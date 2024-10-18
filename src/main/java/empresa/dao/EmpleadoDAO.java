@@ -87,4 +87,22 @@ public class EmpleadoDAO {
 			e.printStackTrace();
 		}
 	}
+	
+	public void agregarEmpleado(Empleado empleado) {
+	    String sql = "INSERT INTO empleados (dni, nombre, sexo, categoria, anos_trabajados) VALUES (?, ?, ?, ?, ?)";
+	    
+	    try (Connection connection = DatabaseConnection.getConnection();
+	         PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+	        preparedStatement.setString(1, empleado.getDni());
+	        preparedStatement.setString(2, empleado.getNombre());
+	        preparedStatement.setString(3, empleado.getSexo());
+	        preparedStatement.setString(4, empleado.getCategoria());
+	        preparedStatement.setInt(5, empleado.getAnosTrabajados());
+	        
+	        preparedStatement.executeUpdate();
+	    } catch (SQLException e) {
+	        e.printStackTrace(); // Manejo de errores
+	    }
+	}
+
 }

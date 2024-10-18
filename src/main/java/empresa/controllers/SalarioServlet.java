@@ -12,24 +12,23 @@ import java.io.IOException;
 @WebServlet("/salario")
 public class SalarioServlet extends HttpServlet {
 	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		String dni = request.getParameter("dni");
-		System.out.println("DNI recibido: " + dni); // Debugging
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	    String dni = request.getParameter("dni");
+	    NominaDAO nominaDAO = new NominaDAO();
+	    double salario = nominaDAO.obtenerSalarioPorDni(dni);
 
-		NominaDAO nominaDAO = new NominaDAO();
-		double salario = nominaDAO.obtenerSalarioPorDni(dni);
-
-		if (salario > 0) {
-			System.out.println("Salario encontrado: " + salario); // Debugging
-			request.setAttribute("dni", dni);
-			request.setAttribute("salario", salario);
-			request.getRequestDispatcher("views/mostrarSalario.jsp").forward(request, response);
-		} else {
-			System.out.println("No se encontró salario para el DNI: " + dni); // Debugging
-			request.setAttribute("error", "No se encontró el salario para el DNI: " + dni);
-			request.getRequestDispatcher("views/mostrarSalario.jsp").forward(request, response);
-		}
+	    if (salario > 0) {
+	        request.setAttribute("dni", dni);
+	        request.setAttribute("salario", salario);
+	        request.getRequestDispatcher("views/mostrarSalario.jsp").forward(request, response);
+	    } else {
+	        request.setAttribute("error", "No se encontró el salario para el DNI: " + dni);
+	        request.getRequestDispatcher("views/mostrarSalario.jsp").forward(request, response);
+	    }
 	}
-
+	@Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // En lugar de permitir un GET en esta URL, puedes redirigir al formulario
+        response.sendRedirect("views/consultarSalario.jsp");
+    }
 }
