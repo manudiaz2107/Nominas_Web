@@ -52,6 +52,5 @@ public class ModificarEmpleServlet extends HttpServlet {
         // Redirigir a la lista de empleados tras la modificación
         response.sendRedirect("empleados");
     }
-
-
 }
+
