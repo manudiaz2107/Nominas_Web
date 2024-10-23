@@ -21,10 +21,11 @@ public class ModificarEmpleServlet extends HttpServlet {
 
         if (empleado != null) {
             request.setAttribute("empleado", empleado);
-            request.getRequestDispatcher("views/modificar.jsp").forward(request, response);
+            request.getRequestDispatcher("views/buscarModificarEmpleado.jsp").forward(request, response);
         } else {
             // Maneja el caso en que no se encuentre el empleado
-            response.sendError(HttpServletResponse.SC_NOT_FOUND, "Empleado no encontrado");
+            request.setAttribute("error", "Empleado no encontrado.");
+            request.getRequestDispatcher("views/buscarModificarEmpleado.jsp").forward(request, response); // Redirige a buscarModificarEmpleado.jsp
         }
     }
 
@@ -48,9 +49,10 @@ public class ModificarEmpleServlet extends HttpServlet {
 
         // Actualizar el salario en la tabla de nóminas
         nominaDAO.actualizarSalario(dni, nuevoSalario);
-
-        // Redirigir a la lista de empleados tras la modificación
-        response.sendRedirect("empleados");
+        
+        // Establecer mensaje de éxito
+        request.setAttribute("mensaje", "Empleado modificado correctamente.");
+        request.getRequestDispatcher("views/buscarModificarEmpleado.jsp").forward(request, response);
     }
 }
 

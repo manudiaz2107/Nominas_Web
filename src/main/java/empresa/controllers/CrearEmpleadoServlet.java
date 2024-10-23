@@ -48,7 +48,7 @@ public class CrearEmpleadoServlet extends HttpServlet {
         
         // Guardar el nuevo empleado en la base de datos
         EmpleadoDAO empleadoDAO = new EmpleadoDAO();
-        empleadoDAO.agregarEmpleado(nuevoEmpleado); // Asegúrate de que este método esté implementado
+        empleadoDAO.agregarEmpleado(nuevoEmpleado);
 
         // Redirigir a la lista de empleados tras la creación
         response.sendRedirect("empleados");

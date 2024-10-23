@@ -69,6 +69,11 @@
             transform: translateY(-2px);
         }
 
+        /* Estilo para los formularios de los botones */
+        .button-form {
+            margin-top: 10px; /* Ajusta el espacio entre los botones */
+        }
+
         @media (max-width: 600px) {
             h1 {
                 font-size: 2em;
@@ -85,6 +90,9 @@
 
     <c:if test="${not empty error}">
         <div class="error">${error}</div>
+    </c:if>
+    <c:if test="${not empty mensaje}">
+        <div class="message">${mensaje}</div>
     </c:if>
 
     <c:if test="${not empty empleado}">
@@ -110,6 +118,9 @@
     </c:if>
 
     <br>
+    <form action="views/buscarModificarEmpleado.jsp" method="get">
+        <input type="submit" value="Volver a modificar">
+    </form>
     <form action="index.jsp" method="get">
         <input type="submit" value="Volver al Menú Principal">
     </form>

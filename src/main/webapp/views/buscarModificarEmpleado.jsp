@@ -5,104 +5,127 @@
     <title>Buscar y Modificar Empleado</title>
     <style>
         body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f4f4f4; /* Color de fondo */
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #e0f7fa, #87cefa); /* Degradado suave */
+            color: #333;
             margin: 0;
             padding: 20px;
             display: flex;
             flex-direction: column;
-            align-items: center; /* Centramos los elementos en el cuerpo */
+            align-items: center;
+            min-height: 100vh;
         }
 
         h2 {
-            color: #2C3E50; /* Color del encabezado */
+            color: #444;
             font-size: 2em;
+            text-align: center;
+            margin-bottom: 20px;
+            font-weight: 300;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            width: 350px;
+            background-color: #ffffff;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 12px;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
             margin-bottom: 20px;
         }
 
-        /* Estilos del formulario */
-        form {
-            background-color: #ffffff; /* Fondo blanco para el formulario */
-            border-radius: 8px; /* Esquinas redondeadas */
-            padding: 20px; /* Padding interno */
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil */
-            width: 80%; /* Ancho del formulario */
-            max-width: 500px; /* Ancho máximo */
-            display: flex;
-            flex-direction: column; /* Disposición vertical */
-        }
-
-        /* Estilos para etiquetas */
         label {
-            margin-bottom: 5px; /* Margen inferior de las etiquetas */
+            font-weight: 500;
+            margin-bottom: 5px;
+            color: #555;
         }
 
-        /* Estilo de entradas de texto */
         input[type="text"], input[type="number"], select {
-            padding: 10px; /* Padding interno */
-            margin-bottom: 15px; /* Margen inferior */
-            border: 1px solid #ddd; /* Borde gris claro */
-            border-radius: 5px; /* Esquinas redondeadas */
+            background-color: #f9f9f9;
+            color: #333;
+            border: 1px solid #ccc;
+            padding: 8px;
+            margin-bottom: 15px;
+            font-size: 1em;
+            border-radius: 8px;
+            transition: border-color 0.3s;
         }
 
-        /* Estilo para botones */
+        input[type="text"]:focus, input[type="number"]:focus, select:focus {
+            border-color: #87cefa;
+            outline: none;
+        }
+
         input[type="submit"] {
-            padding: 8px 12px; /* Padding interno */
-            background-color: #2980B9; /* Color azul */
-            color: white; /* Color de texto blanco */
-            border: none; /* Sin borde */
-            border-radius: 5px; /* Esquinas redondeadas */
-            cursor: pointer; /* Cursor tipo puntero */
-            transition: background-color 0.3s ease, transform 0.3s ease; /* Transiciones suaves */
+            background-color: #87cefa;
+            color: white;
+            border: none;
+            padding: 10px 0;
+            font-size: 1em;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: background-color 0.3s;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
         }
 
         input[type="submit"]:hover {
-            background-color: #1A6A91; /* Color azul oscuro al pasar el ratón */
-            transform: translateY(-2px); /* Efecto de elevación */
+            background-color: #71b8e6;
         }
 
-        /* Diseño responsivo */
-        @media (max-width: 600px) {
-            h2 {
-                font-size: 1.5em; /* Ajustamos el tamaño del encabezado */
-            }
-
-            form {
-                width: 95%; /* Ancho del formulario en dispositivos pequeños */
-            }
+        .error, .message {
+            color: #ff5c5c;
+            font-weight: bold;
+            margin-bottom: 10px;
         }
 
-        /* Estilo para mensajes de error */
-        .error {
-            color: red;
-            margin-bottom: 15px;
-        }
-
-        /* Estilo de la tabla */
-        table {
-            width: 80%;
-            border-collapse: collapse;
-            margin-top: 20px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        th, td {
-            padding: 10px;
-            text-align: center;
-            border: 1px solid #ddd;
-        }
-
-        th {
-            background-color: #2980B9;
+        .menu-bar {
+            background-color: #87cefa;
             color: white;
+            padding: 10px;
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+            border-radius: 0 0 12px 12px;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
         }
 
-        tr:nth-child(even) {
-            background-color: #ecf0f1;
+        .menu-bar span {
+            cursor: pointer;
+            font-size: 1em;
         }
 
-        tr:hover {
-            background-color: #d1e8ff; /* Color de fondo al pasar el ratón */
+        @media (max-width: 600px) {
+            form {
+                width: 100%;
+            }
+        }
+
+        /* Efecto de fondo animado */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 20% 20%, rgba(135, 206, 250, 0.3), transparent 70%),
+                        radial-gradient(circle at 80% 80%, rgba(224, 247, 250, 0.3), transparent 60%),
+                        radial-gradient(circle at 50% 80%, rgba(144, 238, 144, 0.3), transparent 80%);
+            z-index: -1;
+            animation: moveBackground 10s linear infinite;
+            opacity: 0.5; /* Opacidad del fondo */
+        }
+
+        @keyframes moveBackground {
+            0% {
+                transform: translate(0, 0);
+            }
+            100% {
+                transform: translate(20px, 20px); /* Aumentar el movimiento */
+            }
         }
     </style>
 </head>
@@ -111,6 +134,9 @@
 
     <c:if test="${not empty error}">
         <div class="error">${error}</div>
+    </c:if>
+    <c:if test="${not empty mensaje}">
+        <div class="message">${mensaje}</div>
     </c:if>
 
     <form action="${pageContext.request.contextPath}/modificar" method="get">

@@ -14,7 +14,7 @@ public class Empleado {
 		this.categoria = categoria;
 		this.anosTrabajados = anosTrabajados;
 	}
-
+	
 	// Getters y setters
 	public String getDni() {
 		return dni;
@@ -35,4 +35,25 @@ public class Empleado {
 	public int getAnosTrabajados() {
 		return anosTrabajados;
 	}
+
+	public void setDni(String dni) {
+		this.dni = dni;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public void setSexo(String sexo) {
+		this.sexo = sexo;
+	}
+
+	public void setCategoria(String categoria) {
+		this.categoria = categoria;
+	}
+
+	public void setAnosTrabajados(int anosTrabajados) {
+		this.anosTrabajados = anosTrabajados;
+	}
+	
 }

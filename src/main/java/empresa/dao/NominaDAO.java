@@ -32,6 +32,22 @@ public class NominaDAO {
         return salarioBase + incremento;
     }
 
+    public void agregarSalario(String dni, double nuevoSalario) {
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(
+                 "INSERT INTO nominas (empleado_id, salario) VALUES ((SELECT id FROM empleados WHERE dni = ?), ?)")) {
+            preparedStatement.setString(1, dni);
+            preparedStatement.setDouble(2, nuevoSalario);
+
+            // Imprimir el salario y el DNI antes de la ejecución
+            System.out.println("Agregando salario: " + nuevoSalario + " para DNI: " + dni);
+
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace(); // Imprimir error si ocurre
+        }
+    }
+    
     public void actualizarSalario(String dni, double nuevoSalario) {
         try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(

@@ -4,63 +4,102 @@
     <title>Crear Nuevo Empleado</title>
     <style>
         body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f4f4f4;
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #e0f7fa, #87cefa);
+            color: #333;
             margin: 0;
             padding: 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
         }
 
         h1 {
-            color: #2C3E50;
+            color: #444;
             font-size: 2.5em;
+            text-align: center;
             margin-bottom: 20px;
+            font-weight: 300;
         }
 
-        div {
-            margin-bottom: 20px;
-            font-size: 1.1em;
-        }
-
+        /* Form Styles */
         form {
-            background-color: #ffffff;
-            border-radius: 8px;
-            padding: 20px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-            width: 80%;
-            max-width: 500px;
             display: flex;
             flex-direction: column;
+            width: 350px;
+            background-color: #ffffff;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 12px;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
         }
 
         label {
+            font-weight: 500;
             margin-bottom: 5px;
+            color: #555;
         }
 
-        input[type="text"],
-        input[type="number"],
-        select {
-            padding: 10px;
+        input[type="text"], select {
+            background-color: #f9f9f9;
+            color: #333;
+            border: 1px solid #ccc;
+            padding: 8px;
             margin-bottom: 15px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
+            font-size: 1em;
+            border-radius: 8px;
+            transition: border-color 0.3s;
         }
 
-        input[type="submit"] {
-            padding: 10px 15px;
-            background-color: #2980B9;
+        input[type="text"]:focus, select:focus {
+            border-color: #87cefa;
+            outline: none;
+        }
+
+        button {
+            background-color: #87cefa;
             color: white;
             border: none;
-            border-radius: 5px;
+            padding: 10px 0;
+            font-size: 1em;
             cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.3s ease;
+            border-radius: 8px;
+            transition: background-color 0.3s;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
         }
 
-        input[type="submit"]:hover {
-            background-color: #1A6A91;
-            transform: translateY(-2px);
+        button:hover {
+            background-color: #71b8e6;
+        }
+
+        /* Table Styles */
+        table {
+            width: 80%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #87cefa;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #ecf0f1;
+        }
+
+        tr:hover {
+            background-color: #d1e8ff;
         }
 
         @media (max-width: 600px) {
@@ -68,8 +107,8 @@
                 font-size: 2em;
             }
 
-            form {
-                width: 95%;
+            form, table {
+                width: 100%;
             }
         }
     </style>

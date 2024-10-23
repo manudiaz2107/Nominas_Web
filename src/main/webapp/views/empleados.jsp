@@ -4,80 +4,92 @@
 <%@ page import="empresa.models.Empleado" %>
 <html>
 <style>
-body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #e0f7fa, #87cefa); /* Degradado suave */
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden; /* Para ocultar el desbordamiento del fondo */
+        }
 
-h2 {
-    color: #2C3E50;
-    font-size: 2em;
-    margin-bottom: 20px;
-}
+        h2 {
+            color: #444;
+            font-size: 2.5em;
+            text-align: center;
+            margin-bottom: 20px;
+            font-weight: 300;
+        }
 
-/* Table Styles */
-table {
-    width: 80%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
+        .error {
+            color: red;
+            margin-bottom: 20px;
+        }
 
-th, td {
-    padding: 10px;
-    text-align: center;
-    border: 1px solid #ddd;
-}
+        .message {
+            color: green;
+            margin-bottom: 20px;
+        }
 
-th {
-    background-color: #2980B9;
-    color: white;
-}
+        table {
+            width: 80%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+        }
 
-tr:nth-child(even) {
-    background-color: #ecf0f1;
-}
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ccc;
+        }
 
-tr:hover {
-    background-color: #d1e8ff; /* Color de fondo al pasar el ratón */
-}
+        th {
+            background-color: #87cefa;
+            color: white;
+        }
 
-/* Button Styles */
-input[type="submit"] {
-    padding: 8px 12px;
-    background-color: #2980B9;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-}
+        tr:hover {
+            background-color: #f1f1f1; /* Color de fondo al pasar el mouse */
+        }
 
-input[type="submit"]:hover {
-    background-color: #1A6A91;
-    transform: translateY(-2px);
-}
+        input[type="submit"] {
+            background-color: #87cefa;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: background-color 0.3s;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
 
-/* Responsive Design */
-@media (max-width: 600px) {
-    h2 {
-        font-size: 1.5em;
-    }
+        input[type="submit"]:hover {
+            background-color: #71b8e6;
+        }
 
-    table {
-        width: 100%;
-    }
-}
-</style>
+        @media (max-width: 600px) {
+            table {
+                width: 100%;
+            }
+        }
+    </style>
 <head>
     <title>Lista de Empleados</title>
 </head>
 <body>
+<c:if test="${not empty error}">
+        <div class="error">${error}</div>
+    </c:if>
+    <c:if test="${not empty mensaje}">
+        <div class="message">${mensaje}</div>
+    </c:if>
     <h2>Lista de Empleados</h2>
 
     <table border="1">

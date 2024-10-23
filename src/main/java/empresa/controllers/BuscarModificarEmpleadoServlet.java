@@ -15,6 +15,13 @@ public class BuscarModificarEmpleadoServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String dni = request.getParameter("dni");
+        
+        if (dni == null || dni.isEmpty()) {
+            request.setAttribute("error", "Debe proporcionar un DNI para buscar un empleado.");
+            request.getRequestDispatcher("views/buscarModificarEmpleado.jsp").forward(request, response);
+            return;  // Salir del método para evitar que continúe
+        }
+        
         EmpleadoDAO empleadoDAO = new EmpleadoDAO();
         Empleado empleado = empleadoDAO.obtenerEmpleadoPorDNI(dni);
 
@@ -24,7 +31,7 @@ public class BuscarModificarEmpleadoServlet extends HttpServlet {
         } else {
             // Maneja el caso en que no se encuentre el empleado
             request.setAttribute("error", "Empleado no encontrado");
-            request.getRequestDispatcher("views/buscarModificarEmpleado.jsp").forward(request, response);
+            request.getRequestDispatcher("/webapp/views/buscarModificarEmpleado.jsp").forward(request, response);
         }
     }
 

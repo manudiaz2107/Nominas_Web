@@ -82,6 +82,7 @@ ul li a:hover {
         <li><a href="empleados">Mostrar todos los empleados</a></li>
         <li><a href="salario">Mostrar salario de un empleado</a></li>
         <li><a href=views/buscarModificarEmpleado.jsp>Modificar empleado</a></li>
+        <li><a href=views/filtrarEmpleados.jsp>Filtar empleados</a></li>
     </ul>
 </body>
 </html>
